@@ -1,0 +1,183 @@
+<form class="card" id="customerForm">
+  <h2 class="section-title">신청서</h2>
+  <p class="subtitle">아래 정보를 입력해 주세요.</p>
+
+  <!-- =========================
+       A. 고객 정보
+  ========================== -->
+  <div class="section-title" style="margin-top:10px;">A. 고객 정보</div>
+
+  <!-- 1. 주소 -->
+  <div class="section-title">1. 주소</div>
+
+  <div class="field" style="margin-bottom:4px;">
+    <div class="label">도로명 주소</div>
+    <div class="row">
+      <div class="col">
+        <input type="text" id="addrMain" placeholder="도로명 주소" readonly />
+      </div>
+      <div class="col" style="flex:0 0 auto;">
+        <button type="button" class="btn-outline" id="addrSearchBtn">주소 검색</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="label">상세 주소</div>
+    <input type="text" id="addrDetail" placeholder="동/호수까지 정확히 입력해 주세요." />
+  </div>
+
+  <!-- 2. 이름 -->
+  <div class="section-title" style="margin-top:16px;">2. 이름</div>
+  <div class="field">
+    <input type="text" id="name" placeholder="예: 홍길동" />
+  </div>
+
+  <!-- 3. 전화번호 인증 -->
+  <div class="section-title" style="margin-top:16px;">3. 전화번호 (문자 인증 필수)</div>
+  <div class="field">
+    <div class="row">
+      <div class="col">
+        <input type="tel" id="phone" placeholder="예: 010-1234-5678" />
+      </div>
+      <div class="col" style="flex:0 0 auto;">
+        <button type="button" class="btn-outline" id="sendCodeBtn">인증번호 발송</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="row">
+      <div class="col">
+        <input type="text" id="verifyCode" placeholder="인증번호 6자리" />
+      </div>
+      <div class="col" style="flex:0 0 auto;">
+        <button type="button" class="btn-outline" id="confirmCodeBtn">인증 확인</button>
+      </div>
+    </div>
+
+    <div class="hint">※ 통신사 사정에 따라 1~2분 소요될 수 있습니다.</div>
+    <div id="phoneStatus" class="badge" style="display:none;">휴대폰 인증 완료</div>
+    <div id="recaptcha-container"></div>
+  </div>
+
+  <!-- 4. 식별코드 -->
+  <div class="section-title" style="margin-top:16px;">4. 식별코드</div>
+  <div class="field">
+    <input type="text" id="identifierCode" placeholder="예: REF-001, A102" />
+  </div>
+
+  <!-- =========================
+       B. 발주 / 옵션
+  ========================== -->
+  <div class="section-title" style="margin-top:18px;">B. 발주 / 옵션</div>
+  <p class="small" style="margin:0 0 10px;">개통 여부와 발주 상품을 선택해 주세요.</p>
+
+  <!-- 1. 개통유무 -->
+  <div class="section-title">1. 개통유무 (스마트홈 셋팅 비용 포함)</div>
+  <div class="field">
+    <div class="row chip-group" id="activationGroup">
+      <button type="button" class="btn-outline" data-value="yes">YES</button>
+      <button type="button" class="btn-outline" data-value="no">NO</button>
+    </div>
+    <div class="hint" id="activationHint">선택해 주세요.</div>
+  </div>
+
+  <!-- 1-1. 시공 평수 -->
+  <div class="section-title" style="margin-top:16px;">1-1. 시공 평수</div>
+  <div class="field">
+    <input type="number" id="installAreaPyeong" min="0" placeholder="예: 32" />
+    <div class="hint" id="installAreaHint">1평당 단가가 설정된 경우에만 입력 가능합니다.</div>
+  </div>
+
+  <!-- 2. 발주 상품 선택 -->
+  <div class="section-title" style="margin-top:14px;">2. 발주 상품 선택</div>
+
+  <!-- ✅ 전체 검색: 항상 노출 (발주처 버튼보다 위) -->
+  <div class="field" style="margin:0 0 10px;">
+    <div class="label">전체 상품 검색</div>
+    <input type="text" id="productSearch" class="search-input" placeholder="리바트+지비스 전체 상품 검색 (상품명/발주코드)" />
+    <div class="hint" id="searchHint" style="margin-top:6px;">검색어를 입력하면 발주처/상품군 선택 없이도 전체 상품에서 검색됩니다.</div>
+  </div>
+
+  <div class="field">
+    <div class="row chip-group" id="vendorGroup">
+      <button type="button" class="btn-outline" data-vendor="hanssem">리바트 운영제품</button>
+      <button type="button" class="btn-outline" data-vendor="zibis">지비스 자체상품</button>
+    </div>
+    <div class="hint" id="vendorHint">발주처를 선택하면 상품군/상품이 표시됩니다. (리바트/지비스를 번갈아 선택해도 기존 수량은 유지됩니다)</div>
+  </div>
+
+  <!-- 상품군 -->
+  <div id="categoryWrap" class="field" style="display:none;">
+    <div class="label">상품군</div>
+    <div class="row chip-group" id="categoryGroup" style="flex-wrap:wrap;"></div>
+  </div>
+
+  <!-- 상품 리스트 -->
+  <div id="productWrap" style="display:none;">
+    <div class="label" style="margin-bottom:6px;">상품 선택 & 수량</div>
+    <div id="productGrid" class="product-grid"></div>
+    <div class="hint" id="productHint" style="margin-top:8px;">수량을 1개 이상 선택해 주세요.</div>
+  </div>
+
+  <!-- =========================
+       C. 회로 설계 입력
+  ========================== -->
+  <div class="section-title" style="margin-top:18px;">C. 회로 설계 입력</div>
+  <p class="small" style="margin:0 0 10px;">스위치 구성을 입력해 주세요.</p>
+
+  <div class="field">
+    <div class="label">1) 스위치 선택 (1구 ~ 6구)</div>
+    <div id="switchGrid" class="switch-grid"></div>
+    <div class="hint">각 구수별로 - / + 로 수량을 조절할 수 있어요.</div>
+  </div>
+
+  <div class="field">
+    <div class="label">2) 사제 상품(우리 제품 미사용) 스위치 구수 합계</div>
+    <div id="thirdPartyGrid" class="switch-grid"></div>
+    <div class="hint">사제 스위치의 “구수 합계”만 입력하면 됩니다.</div>
+  </div>
+
+  <!-- =========================
+       요약
+  ========================== -->
+  <div class="card" style="margin-top:14px;">
+    <div class="section-title">최근 선택 요약</div>
+    <div id="summaryBox" class="summary-box">아직 선택된 항목이 없습니다.</div>
+  </div>
+
+  <div class="row" style="margin-top:12px;">
+    <div class="col">
+      <button type="button" class="btn-secondary" id="resetEstimateBtn" style="width:100%; justify-content:center;">
+        ♻️ 견적 초기화
+      </button>
+    </div>
+    <div class="col">
+      <button type="button" class="btn-secondary" id="exportExcelBtn" style="width:100%; justify-content:center;">
+        📥 엑셀 저장
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================
+       견적 결과
+  ========================== -->
+  <div class="card" id="estimateResultBox" style="margin-top:14px; display:none;">
+    <div class="section-title">견적 결과</div>
+
+    <div class="summary-box">
+      <div>• 스마트 조명 합계 금액: <strong id="sumLighting">0원</strong></div>
+      <div>• 시공 합계 금액: <strong id="sumInstall">0원</strong></div>
+      <div>• 스마트홈 세팅 비용: <strong id="sumSmartHome">0원</strong></div>
+      <hr style="margin:10px 0;">
+      <div class="label order-code-toggle" id="orderCodeToggle" style="margin:0; cursor:pointer;">
+        발주 코드 <span class="small" style="font-weight:400;">(클릭해서 보기)</span>
+        <span id="orderCodeChevron" class="order-code-chevron">▼</span>
+      </div>
+      <div id="orderCode" class="order-code hidden">-</div>
+    </div>
+  </div>
+
+  <div id="status" class="status"></div>
+</form>

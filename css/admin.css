@@ -1,0 +1,134 @@
+.toolbar { display:flex; flex-wrap:wrap; gap:8px; justify-content:space-between; align-items:center; margin-bottom:12px; }
+.left-tools, .right-tools { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+
+.admin-badge {
+  display:inline-flex; align-items:center; border-radius:999px; font-size:11px; padding:4px 8px;
+  background:#eef2ff; color:#3730a3; gap:4px;
+}
+
+.filter-group { display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:12px; }
+.search-input { min-width: 220px; border-radius:999px; }
+
+.btn-primary-inline {
+  padding:9px 16px; border-radius:999px; border:none; background:#2563eb; color:#fff; font-size:14px; font-weight:600;
+  cursor:pointer; box-shadow:0 8px 20px rgba(37,99,235,0.28); transition:0.15s ease;
+  display:inline-flex; align-items:center; gap:6px; white-space:nowrap;
+}
+.btn-primary-inline:hover { background:#1d4ed8; }
+
+.table-wrapper { margin-top:8px; overflow-x:auto; }
+table { width:100%; border-collapse:collapse; margin-top:8px; font-size:12px; }
+thead { background:#f9fafb; }
+th, td { padding:8px 6px; border-bottom:1px solid #e5e7eb; text-align:left; vertical-align:top; }
+th { font-size:11px; color:#6b7280; text-transform:uppercase; letter-spacing:0.03em; user-select:none; white-space:nowrap; }
+th.sortable { cursor:pointer; }
+th.sortable .sort-indicator { font-size:10px; margin-left:4px; opacity:0.6; }
+tbody tr:hover { background:#f9fafb; }
+
+.status-pill { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; }
+.status-pending { background:#fef3c7; color:#92400e; }
+.status-assigned { background:#dbeafe; color:#1e40af; }
+.status-done { background:#dcfce7; color:#166534; }
+.status-cancel { background:#fee2e2; color:#991b1b; }
+
+.nowrap { white-space:nowrap; }
+.empty-state { text-align:center; font-size:13px; color:#9ca3af; padding:40px 0; }
+
+.btn-danger-inline {
+  padding:4px 10px; border-radius:999px; border:1px solid #fecaca; background:#fee2e2;
+  font-size:11px; color:#b91c1c; cursor:pointer;
+}
+.btn-danger-inline:hover { background:#fecaca; }
+
+
+/* ===== New Admin Tabs / Catalog Editor ===== */
+.admin-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+.tab-btn{
+  border:1px solid #e5e7eb;
+  background:#fff;
+  color:#111827;
+  padding:8px 10px;
+  border-radius:10px;
+  font-size:13px;
+  cursor:pointer;
+}
+.tab-btn.selected{
+  border-color:#111827;
+  background:#111827;
+  color:#fff;
+}
+.table-wrap{
+  width:100%;
+  overflow:auto;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+}
+.price-input{
+  width:100%;
+  padding:8px 10px;
+  border:1px solid #e5e7eb;
+  border-radius:10px;
+  text-align:right;
+}
+.price-input:disabled{
+  background:#f3f4f6;
+  color:#6b7280;
+}
+.catalog-row.deleted{
+  opacity:0.45;
+  text-decoration:line-through;
+}
+.catalog-img-cell{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.catalog-img-cell .img-preview{
+  width:56px;
+  height:40px;
+  object-fit:cover;
+  border-radius:8px;
+  border:1px solid #e5e7eb;
+  flex:0 0 auto;
+}
+.catalog-img-cell .img-controls{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  min-width:180px;
+}
+.catalog-img-cell select, .catalog-img-cell input[type="text"], .admin-table select, .admin-table input[type="text"], .admin-table input[type="number"]{
+  width:100%;
+  padding:8px 10px;
+  border:1px solid #e5e7eb;
+  border-radius:10px;
+}
+
+
+/* === Catalog table layout tweaks (이미지 칸 줄이고, 텍스트 가독성 확보) === */
+#catalogTable{
+  table-layout: fixed;
+}
+#catalogTable th, #catalogTable td{
+  white-space: normal;
+  word-break: break-word;
+}
+#catalogTable th{
+  line-height: 1.15;
+}
+#catalogTable .catalog-img-cell .img-controls{
+  min-width: 0;
+}
+#catalogTable .catalog-img-cell{
+  width: 170px;
+}
+#catalogTable .catalog-img-cell img{
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}

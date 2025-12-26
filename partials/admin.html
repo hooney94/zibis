@@ -1,0 +1,145 @@
+<!-- 관리자 탭 -->
+<div class="card">
+  <h2 style="margin:0 0 8px; font-size:18px;">조명 개통 신청 - 관리자 페이지</h2>
+  <p class="subtitle">단가/품목을 설정하고, 다른 PC로 settings.json 파일로 그대로 이관할 수 있습니다.</p>
+
+  <div class="toolbar" style="margin:10px 0 0;">
+    <div class="left-tools">
+      <button class="btn-primary-inline" id="exportSettingsBtn">📤 settings.json 내보내기</button>
+
+      <button class="btn-primary-inline" id="applyLocalSettingsBtn">⚡ settings.json 자동 불러와 적용</button>
+
+      <label class="btn-primary-inline" style="cursor:pointer;">
+        📥 (대안) JSON 파일 선택 후 적용
+        <input id="importSettingsInput" type="file" accept="application/json" style="display:none;" />
+      </label>
+
+      <span class="admin-badge" id="settingsStatus" style="display:none;"></span>
+    </div>
+  </div>
+
+  <div class="admin-tabs">
+    <button type="button" class="tab-btn selected" data-tab="pricing">1) 기본 단가 설정</button>
+    <button type="button" class="tab-btn" data-tab="catalog">2) 조명 품목 관리</button>
+  </div>
+</div>
+
+<!-- 1) 기본 단가 설정 -->
+<section id="adminTab_pricing" class="admin-tab">
+  <div class="card">
+    <h3 class="section-title" style="margin:0 0 10px;">기본 단가 설정</h3>
+    <p class="subtitle" style="margin-top:0;">
+      “개통비(스마트홈 셋팅 비용)”를 사용할 경우, 1평당 단가(개통단가/시공단가)는 사용할 수 없습니다. (상호 배타)
+    </p>
+
+    <div class="table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th style="width:280px;">설정 항목</th>
+            <th>대리점가</th>
+            <th>소비자가</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="nowrap"><strong>개통비 (스마트홈 셋팅 비용)</strong></td>
+            <td><input class="input price-input" id="price_activation_dealer" inputmode="numeric" placeholder="숫자만" /></td>
+            <td><input class="input price-input" id="price_activation_retail" inputmode="numeric" placeholder="숫자만" /></td>
+          </tr>
+
+          <tr>
+            <td class="nowrap"><strong>1평당 개통단가</strong></td>
+            <td><input class="input price-input" id="price_install_dealer" inputmode="numeric" placeholder="숫자만" /></td>
+            <td><input class="input price-input" id="price_install_retail" inputmode="numeric" placeholder="숫자만" /></td>
+          </tr>
+
+          <tr>
+            <td class="nowrap"><strong>1평당 시공단가</strong></td>
+            <td><input class="input price-input" id="price_construction_dealer" inputmode="numeric" placeholder="숫자만" /></td>
+            <td><input class="input price-input" id="price_construction_retail" inputmode="numeric" placeholder="숫자만" /></td>
+          </tr>
+          <tr>
+            <td class="nowrap"><strong>메인등 1개당 시공비</strong></td>
+            <td><input class="price-input" id="price_main_install_dealer" inputmode="numeric" placeholder="숫자만" /></td>
+            <td><input class="price-input" id="price_main_install_retail" inputmode="numeric" placeholder="숫자만" /></td>
+          </tr>
+
+          <tr>
+            <td class="nowrap"><strong>매립등 1개당 시공비</strong></td>
+            <td><input class="price-input" id="price_recess_install_dealer" inputmode="numeric" placeholder="숫자만" /></td>
+            <td><input class="price-input" id="price_recess_install_retail" inputmode="numeric" placeholder="숫자만" /></td>
+          </tr>
+
+          <tr>
+            <td class="nowrap"><strong>라인등 1개당 시공비</strong></td>
+            <td><input class="price-input" id="price_line_install_dealer" inputmode="numeric" placeholder="숫자만" /></td>
+            <td><input class="price-input" id="price_line_install_retail" inputmode="numeric" placeholder="숫자만" /></td>
+          </tr>
+
+
+          <tr>
+            <td class="nowrap"><strong>스위치 1구당 단가</strong></td>
+            <td><input class="input price-input" id="price_switch_dealer" inputmode="numeric" placeholder="숫자만" /></td>
+            <td><input class="input price-input" id="price_switch_retail" inputmode="numeric" placeholder="숫자만" /></td>
+          </tr>
+
+          <tr>
+            <td class="nowrap"><strong>사제 제품 1구당 단가</strong></td>
+            <td><input class="input price-input" id="price_third_dealer" inputmode="numeric" placeholder="숫자만" /></td>
+            <td><input class="input price-input" id="price_third_retail" inputmode="numeric" placeholder="숫자만" /></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="toolbar" style="margin-top:12px;">
+      <div class="left-tools">
+        <button class="btn-primary-inline" id="pricingSaveBtn">💾 설정 저장</button>
+        <span class="admin-badge" id="pricingStatus" style="display:none;"></span>
+      </div>
+      <div class="right-tools">
+        <button class="btn-outline-inline" id="pricingReloadBtn">↻ 불러오기</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2) 조명 품목 관리 -->
+<section id="adminTab_catalog" class="admin-tab" style="display:none;">
+  <div class="card">
+    <h3 class="section-title" style="margin:0 0 10px;">조명 품목 리스트</h3>
+    <p class="subtitle" style="margin-top:0;">
+      분류(리바트/지비스)/카테고리/단가(대리점가/소비자가)/이미지/발주코드를 관리합니다.
+    </p>
+
+    <div class="toolbar" style="margin:0 0 10px;">
+      <div class="left-tools">
+        <button class="btn-primary-inline" id="addItemBtn">＋ 품목 추가</button>
+        <button class="btn-primary-inline" id="catalogSaveBtn">💾 설정 저장</button>
+        <span class="admin-badge" id="catalogStatus" style="display:none;"></span>
+      </div>
+      <div class="right-tools">
+        <button class="btn-outline-inline" id="catalogReloadBtn">↻ 불러오기</button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="admin-table" id="catalogTable">
+        <thead>
+          <tr>
+            <th style="width:90px;">분류</th>
+            <th style="width:130px;">카테고리</th>
+            <th style="min-width:240px;">품명</th>
+            <th style="width:110px;">대리점가</th>
+            <th style="width:110px;">소비자가</th>
+            <th style="width:170px;">이미지<br>(URL/업로드)</th>
+            <th style="width:140px;">발주코드</th>
+            <th style="width:72px;">삭제</th>
+          </tr>
+        </thead>
+        <tbody id="catalogBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
