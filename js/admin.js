@@ -7,7 +7,7 @@ const CATEGORIES_BY_VENDOR = {
 };
 
 const VENDORS = [
-  { value: "hanssem", label: "리바트" },
+  { value: "hanssem", label: "한샘" },
   { value: "zibis", label: "지비스" },
 ];
 

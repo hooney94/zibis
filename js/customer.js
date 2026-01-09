@@ -26,11 +26,11 @@ function svgUri(label) {
 // 초기 DB가 비었을 때만 fallback
 const DEFAULT_CATALOG = {
   hanssem: {
-    매립등: [{ id: "h-recess-01", name: "리바트 매립등 A", img: svgUri("리바트 매립등 A"), orderCode: "" }],
-    메인등: [{ id: "h-main-01", name: "리바트 메인등 A", img: svgUri("리바트 메인등 A"), orderCode: "" }],
-    라인등: [{ id: "h-line-01", name: "리바트 라인등 A", img: svgUri("리바트 라인등 A"), orderCode: "" }],
-    마그네틱: [{ id: "h-mag-01", name: "리바트 마그네틱 A", img: svgUri("리바트 마그네틱 A"), orderCode: "" }],
-    기타: [{ id: "h-etc-01", name: "리바트 기타 상품", img: svgUri("리바트 기타"), orderCode: "" }],
+    매립등: [{ id: "h-recess-01", name: "한샘 매립등 A", img: svgUri("한샘 매립등 A"), orderCode: "" }],
+    메인등: [{ id: "h-main-01", name: "한샘 메인등 A", img: svgUri("한샘 메인등 A"), orderCode: "" }],
+    라인등: [{ id: "h-line-01", name: "한샘 라인등 A", img: svgUri("한샘 라인등 A"), orderCode: "" }],
+    마그네틱: [{ id: "h-mag-01", name: "한샘 마그네틱 A", img: svgUri("한샘 마그네틱 A"), orderCode: "" }],
+    기타: [{ id: "h-etc-01", name: "한샘 기타 상품", img: svgUri("한샘 기타"), orderCode: "" }],
   },
   zibis: {
     매립등: [{ id: "z-recess-01", name: "지비스 매립등 A", img: svgUri("지비스 매립등 A"), orderCode: "" }],
@@ -438,7 +438,7 @@ function wireCustomer({ rootEl, db, auth }) {
 
     const allowed = categoriesForVendor(state.vendor, state.catalogMap || DEFAULT_CATALOG);
     if (state.category && !allowed.includes(state.category)) state.category = null;
-    vendorHint.textContent = state.vendor === "hanssem" ? "리바트 운영제품 선택됨" : "지비스 자체상품 선택됨";
+    vendorHint.textContent = state.vendor === "hanssem" ? "한샘 운영제품 선택됨" : "지비스 자체상품 선택됨";
 
     renderCategories();
     categoryWrap.style.display = "block";
@@ -555,7 +555,7 @@ function wireCustomer({ rootEl, db, auth }) {
 
     const vb = document.createElement("span");
     vb.className = "product-badge";
-    vb.textContent = p.vendor === "hanssem" ? "리바트" : "지비스";
+    vb.textContent = p.vendor === "hanssem" ? "한샘" : "지비스";
 
     const cb = document.createElement("span");
     cb.className = "product-badge";
@@ -931,7 +931,7 @@ function wireCustomer({ rootEl, db, auth }) {
     installAreaEl.value = "";
 
     activationHint.textContent = "선택해 주세요.";
-    vendorHint.textContent = "발주처를 선택하면 상품군/상품이 표시됩니다. (리바트/지비스를 번갈아 선택해도 기존 수량은 유지됩니다)";
+    vendorHint.textContent = "발주처를 선택하면 상품군/상품이 표시됩니다. (한샘/지비스를 번갈아 선택해도 기존 수량은 유지됩니다)";
     setSelectedByData(activationGroup, "data-value", "__none__");
     setSelectedByData(vendorGroup, "data-vendor", "__none__");
 

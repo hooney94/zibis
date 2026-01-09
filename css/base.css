@@ -31,7 +31,7 @@ textarea { resize: vertical; min-height:70px; }
 }
 .btn-outline:hover { background:#eef2ff; }
 
-/* ✅ 선택된 버튼(YES/NO, 리바트/지비스, 카테고리 등) 강조 */
+/* ✅ 선택된 버튼(YES/NO, 한샘/지비스, 카테고리 등) 강조 */
 .btn-outline.selected{
   border-color:#111827;
   background:#111827;
